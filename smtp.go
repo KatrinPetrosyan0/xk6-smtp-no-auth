@@ -25,7 +25,7 @@ func check(e error) {
 	}
 }
 
-func (*SMTP) SendMail(host string, port string, sender string, _ string, recipient string, options options) {
+func (*SMTP) SendMail(host string, port string, sender string, recipient string, options options) {
 	emailMessage := "From: " + sender + "\r\n" + "To: " + recipient + "\r\n"
 
 	if options.Subject != "" {
@@ -41,6 +41,6 @@ func (*SMTP) SendMail(host string, port string, sender string, _ string, recipie
 	}
 
 	body := []byte(emailMessage)
-	err := smtp.SendMail(host+":"+port, nil, sender, options.UDW, body)
+	err := smtp.SendMail(host+":"+port, sender, options.UDW, body)
 	check(err)
 }
